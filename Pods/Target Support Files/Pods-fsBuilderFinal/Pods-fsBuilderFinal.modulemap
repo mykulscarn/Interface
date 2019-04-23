@@ -1,0 +1,6 @@
+framework module Pods_fsBuilderFinal {
+  umbrella header "Pods-fsBuilderFinal-umbrella.h"
+
+  export *
+  module * { export * }
+}
