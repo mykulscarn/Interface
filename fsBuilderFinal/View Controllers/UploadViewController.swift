@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseStorage
 
 
 class UploadViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -18,6 +19,8 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate, U
     @IBOutlet weak var previewImage: UIImageView!
     
     var picker = UIImagePickerController()
+   // let metadata = StorageMetadata()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,8 +29,8 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate, U
     }
     
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
+    func imagePickerController(_ picker: UIImagePickerController,didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[.originalImage] as? UIImage {
             self.previewImage.image = image
             selectBtn.isHidden = true
             postBtn.isHidden = false
@@ -46,6 +49,7 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate, U
         
     }
     
+    let image = UIImage()
     
     @IBAction func postPressed(_ sender: Any) {
         AppDelegate.instance().showActivityIndicator()
@@ -56,39 +60,44 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate, U
         
         let key = ref.child("posts").childByAutoId().key
         let imageRef = storage.child("posts").child(uid).child("\(key).jpg")
+        
     
-        let data = UIImageJPEGRepresentation(self.previewImage.image!, 0.6)
+        
+       
+        guard let data = self.image.jpegData(compressionQuality: 0.50) else { return }
         //let data = UIImage(data: imageRef, scale: 0.6)
             //imageRef.jpegData(compressionQuality:0.6)
         
-        let uploadTask = imageRef.put(data!, metadata: nil) { (metadata, error) in
-            if error != nil {
-                print(error!.localizedDescription)
-                AppDelegate.instance().dismissActivityIndicatos()
-                return
-            }
-            
-            imageRef.downloadURL(completion: { (url, error) in
-                if let url = url {
-                    let feed = ["userID" : uid,
-                                "pathToImage" : url.absoluteString,
-                                "likes" : 0,
-                                "author" : FIRAuth.auth()!.currentUser!.displayName!,
-                                "postID" : key] as [String : Any]
-                    
-                    let postFeed = ["\(key)" : feed]
-                    
-                    ref.child("posts").updateChildValues(postFeed)
-                    AppDelegate.instance().dismissActivityIndicatos()
-                    
-                    self.dismiss(animated: true, completion: nil)
-                }
-            })
-            
-        }
-        
-        uploadTask.resume()
-        
-    }
+
+//
+//        let uploadTask = imageRef.putData(data, metadata: nil, completion: { (metadata, err) in
+//            if err != nil {
+//                print(err!.localizedDescription)
+//                AppDelegate.instance().dismissActivityIndicatos()
+//                return
+//            }
+//
+//            imageRef.downloadURL(completion: { (url, error) in
+//                if let url = url {
+//                    let feed = ["userID" : uid,
+//                                "pathToImage" : url.absoluteString,
+//                                "likes" : 0,
+//                                "author" : Auth.auth().currentUser!.displayName!,
+//                                "postID" : key] as [String : Any]
+//
+//                    let postFeed = ["\(key)" : feed]
+//
+//                    ref.child("posts").updateChildValues(postFeed)
+//                    AppDelegate.instance().dismissActivityIndicatos()
+//
+//                    self.dismiss(animated: true, completion: nil)
+//                }
+//            })
+
+     //   }
+
+ //       uploadTask.resume()
+
+     }
     
 }

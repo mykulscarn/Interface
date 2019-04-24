@@ -41,7 +41,7 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     }
                 }
             }
-            self.tableview.reloadData()
+            self.tableView.reloadData()
         })
         ref.removeAllObservers()
         
@@ -52,10 +52,10 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableview.dequeueReusableCell(withIdentifier: "userCell", for: indexPath) as! UserCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "userCell", for: indexPath) as! UserCell
         
         cell.nameLabel.text = self.user[indexPath.row].fullName
-        cell.userID = self.user[indexPath.row].userID
+     //   cell.userID = self.user[indexPath.row].userID
         cell.userImage.downloadImage(from: self.user[indexPath.row].imagePath!)
         checkFollowing(indexPath: indexPath)
         
@@ -85,7 +85,7 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         ref.child("users").child(uid).child("following/\(ke)").removeValue()
                         ref.child("users").child(self.user[indexPath.row].userID).child("followers/\(ke)").removeValue()
                         
-                        self.tableview.cellForRow(at: indexPath)?.accessoryType = .none
+                        self.tableView.cellForRow(at: indexPath)?.accessoryType = .none
                     }
                 }
             }

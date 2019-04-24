@@ -20,14 +20,17 @@ class SignupViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     let picker = UIImagePickerController()
     var userStorage: StorageReference!
-    let userID = Auth.auth().currentUser!.uid
+//    let userID = Auth.auth().currentUser!.uid
     var ref: DatabaseReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        if let userID = Auth.auth().currentUser?.uid {
+            print("UserID: \(userID)")
+            return
+        }
         picker.delegate = self
-        
+        nextBtn.isHidden = false
         let storage = Storage.storage().reference(forURL: "gs://todfsbuilder.appspot.com/")
         
         ref = Database.database().reference()
@@ -40,12 +43,19 @@ class SignupViewController: UIViewController, UIImagePickerControllerDelegate, U
         
         picker.allowsEditing = true
         picker.sourceType = .photoLibrary
-        
-        present(picker, animated: true, completion: nil)
+        DispatchQueue.main.async {
+            self.present(self.picker, animated: true, completion: nil)
+        }
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
+    
+   
+    let image = UIImage()
+    
+    
+    
+    func imagePickerController(_ picker: UIImagePickerController,didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+       if let image = info[.editedImage] as? UIImage {
             self.imageView.image = image
             nextBtn.isHidden = false
         }
@@ -70,41 +80,57 @@ class SignupViewController: UIViewController, UIImagePickerControllerDelegate, U
                     changeRequest.displayName = self.nameField.text!
                     changeRequest.commitChanges(completion: nil)
                     
-                    let imageRef = self.userStorage.child("\(user.user.uid).jpg")
+  //                  let imageRef = self.userStorage.child("\(user.user.uid).jpg")
+  //                  let data = self.image.jpegData(compressionQuality: 0.50)
                     
-                    let data = UIImageJPEGRepresentation(self.imageView.image!, 0.5)
+                    //This code is copied from uploadTask block. Remove When code fixed
                     
-                    let uploadTask = imageRef.put(data!, metadata: nil, completion: { (metadata, err) in
-                        if err != nil {
-                            print(err!.localizedDescription)
-                        }
-                        
-                        imageRef.downloadURL(completion: { (url, er) in
-                            if er != nil {
-                                print(er!.localizedDescription)
-                            }
-                            
-                            
-                            if let url = url {
-                                
-                                let userInfo: [String : Any] = ["uid" : user.uid,
-                                                                "full name" : self.nameField.text!,
-                                                                "urlToImage" : url.absoluteString]
-                                
-                                self.ref.child("users").child(user.uid).setValue(userInfo)
-                                
-                                
-                                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "usersVC")
-                                
-                                self.present(vc, animated: true, completion: nil)
-                                
-                            }
-                            
-                        })
-                        
-                    })
+                    if true {
+
+                        let userInfo: [String : Any] = ["uid" : user.user.uid,
+                                                        "full name" : self.nameField.text!,
+                                                        "urlToImage" : ""]
+
+                        self.ref.child("users").child(user.user.uid).setValue(userInfo)
+
+
+                        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "usersVC")
+
+                        self.present(vc, animated: true, completion: nil)
+
+                    }
                     
-                    uploadTask.resume()
+//                    let uploadTask = imageRef.putData(data!, metadata: nil, completion: { (metadata, err) in
+//                        if err != nil {
+//                            print(err!.localizedDescription)
+//                        }
+//
+//                        imageRef.downloadURL(completion: { (url, er) in
+//                            if er != nil {
+//                                print(er!.localizedDescription)
+//                            }
+//                            
+//                            
+//                            if let url = url {
+//
+//                                let userInfo: [String : Any] = ["uid" : user.user.uid,
+//                                                                "full name" : self.nameField.text!,
+//                                                                "urlToImage" : url.absoluteString]
+//
+//                                self.ref.child("users").child(user.user.uid).setValue(userInfo)
+//
+//                                
+//                                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "usersVC")
+//
+//                                self.present(vc, animated: true, completion: nil)
+//                                
+//                            }
+//                            
+//                        })
+//
+//                    })
+                    
+            //        uploadTask.resume()
                     
                 }
                 
