@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		351CEFD7227A121B0039A4B4 /* StandingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351CEFD6227A121B0039A4B4 /* StandingsTableViewController.swift */; };
+		354158392270ED4300E163DF /* LiveTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354158382270ED4300E163DF /* LiveTableViewController.swift */; };
+		3541583B2270F17000E163DF /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3541583A2270F17000E163DF /* HistoryTableViewController.swift */; };
+		3541583D227101F300E163DF /* DFSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3541583C227101F300E163DF /* DFSViewController.swift */; };
+		3541583F227107E700E163DF /* LineupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3541583E227107E700E163DF /* LineupsTableViewController.swift */; };
+		35415841227118B300E163DF /* UserRecordsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35415840227118B300E163DF /* UserRecordsTableViewController.swift */; };
 		35E320F4226E60B80030D27D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E320F3226E60B80030D27D /* AppDelegate.swift */; };
 		35E320F6226E60B80030D27D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E320F5226E60B80030D27D /* ViewController.swift */; };
 		35E320F9226E60B80030D27D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35E320F7226E60B80030D27D /* Main.storyboard */; };
@@ -27,6 +33,12 @@
 
 /* Begin PBXFileReference section */
 		208FAD2DBA52FFA0BCC6DC06 /* Pods-fsBuilderFinal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fsBuilderFinal.release.xcconfig"; path = "Target Support Files/Pods-fsBuilderFinal/Pods-fsBuilderFinal.release.xcconfig"; sourceTree = "<group>"; };
+		351CEFD6227A121B0039A4B4 /* StandingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandingsTableViewController.swift; sourceTree = "<group>"; };
+		354158382270ED4300E163DF /* LiveTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveTableViewController.swift; sourceTree = "<group>"; };
+		3541583A2270F17000E163DF /* HistoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewController.swift; sourceTree = "<group>"; };
+		3541583C227101F300E163DF /* DFSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DFSViewController.swift; sourceTree = "<group>"; };
+		3541583E227107E700E163DF /* LineupsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineupsTableViewController.swift; sourceTree = "<group>"; };
+		35415840227118B300E163DF /* UserRecordsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRecordsTableViewController.swift; sourceTree = "<group>"; };
 		35E320F0226E60B80030D27D /* fsBuilderFinal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fsBuilderFinal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		35E320F3226E60B80030D27D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		35E320F5226E60B80030D27D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -130,6 +142,12 @@
 				35E32110226E7AAB0030D27D /* UsersViewController.swift */,
 				35E32112226E7AB40030D27D /* UploadViewController.swift */,
 				35E3210C226E7A990030D27D /* FeedViewController.swift */,
+				354158382270ED4300E163DF /* LiveTableViewController.swift */,
+				3541583C227101F300E163DF /* DFSViewController.swift */,
+				351CEFD6227A121B0039A4B4 /* StandingsTableViewController.swift */,
+				3541583E227107E700E163DF /* LineupsTableViewController.swift */,
+				35415840227118B300E163DF /* UserRecordsTableViewController.swift */,
+				3541583A2270F17000E163DF /* HistoryTableViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -271,8 +289,13 @@
 			files = (
 				35E32115226E7B660030D27D /* UserCell.swift in Sources */,
 				35E3210F226E7AA20030D27D /* LoginViewController.swift in Sources */,
+				3541583D227101F300E163DF /* DFSViewController.swift in Sources */,
+				3541583F227107E700E163DF /* LineupsTableViewController.swift in Sources */,
 				35E32111226E7AAB0030D27D /* UsersViewController.swift in Sources */,
+				354158392270ED4300E163DF /* LiveTableViewController.swift in Sources */,
 				35E3210D226E7A990030D27D /* FeedViewController.swift in Sources */,
+				351CEFD7227A121B0039A4B4 /* StandingsTableViewController.swift in Sources */,
+				35415841227118B300E163DF /* UserRecordsTableViewController.swift in Sources */,
 				35E3210B226E7A8D0030D27D /* SignupViewController.swift in Sources */,
 				35E32117226E7B8F0030D27D /* PostCell.swift in Sources */,
 				35E320F6226E60B80030D27D /* ViewController.swift in Sources */,
@@ -280,6 +303,7 @@
 				35E320F4226E60B80030D27D /* AppDelegate.swift in Sources */,
 				35E32119226E7BBA0030D27D /* Post.swift in Sources */,
 				35E3211B226E7BCF0030D27D /* User.swift in Sources */,
+				3541583B2270F17000E163DF /* HistoryTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
